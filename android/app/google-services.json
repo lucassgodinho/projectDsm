@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "985221925769",
+    "project_id": "aula-flutter-dsm",
+    "storage_bucket": "aula-flutter-dsm.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985221925769:android:a0e3c735bc841faa136f58",
+        "android_client_info": {
+          "package_name": "com.example.ap2_dsm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKxuId2OFnW_megvEd8XU9ynAeHmJpl68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985221925769:android:fc8ec92b25de6c67136f58",
+        "android_client_info": {
+          "package_name": "com.example.desenvolvimento_de_sistema_moveis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKxuId2OFnW_megvEd8XU9ynAeHmJpl68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
