@@ -19,4 +19,6 @@ class ApiService {
       throw Exception('Erro ao buscar personagens: $e');
     }
   }
+
+
 }

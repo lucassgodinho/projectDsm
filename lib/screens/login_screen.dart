@@ -56,15 +56,15 @@ class LoginScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
+                  authService._cleanStates(); 
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            RegisterScreen(authService: authService)),
+                        builder: (context) => RegisterScreen(authService: authService)),
                   );
                 },
                 child: const Text("Cadastre-se"),
-              )
+              ),
             ],
           ),
         ),
@@ -72,3 +72,9 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+extension on AuthService {
+  void _cleanStates() {}
+}
+
+

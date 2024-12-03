@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         "/": (context) => LoginScreen(authService: authService),
         "/register": (context) => RegisterScreen(authService: authService),
-        "/home": (context) => HomeScreen(apiService: apiService)
+        "/home": (context) => HomeScreen(apiService: apiService,authService: authService)
       },
     );
   }

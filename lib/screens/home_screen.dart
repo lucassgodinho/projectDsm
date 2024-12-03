@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:desenvolvimento_de_sistema_moveis/services/api_service.dart';
-import '../models/character.dart';
+import '/services/auth_service.dart';
+import '/services/api_service.dart';
+import '/models/character.dart';
 
 
 class HomeScreen extends StatefulWidget {
   final ApiService apiService;
+  final AuthService authService;
 
-  const HomeScreen({Key? key, required this.apiService}) : super(key: key);
+  const HomeScreen({Key? key, required this.apiService,required this.authService}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -14,11 +16,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final ApiService service;
+  late final AuthService authservices;
 
   @override
   void initState() {
     super.initState();
     service = widget.apiService;
+    authservices = widget.authService;
 
     characters = service.getCharacters();
   }
@@ -30,30 +34,39 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              authservices.logout(context);
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
-      body: FutureBuilder<List<Character>>(
-        future: characters,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Erro: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('Nenhum personagem encontrado'));
-          } else {
-            List<Character> characterList = snapshot.data!;
+        body: FutureBuilder<List<Character>>(
+          future: characters,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError || snapshot.data!.isEmpty ?? true) {
+              return Center(child: Text(snapshot.hasError ? 'Erro: ${snapshot.error}' : 'Nenhum personagem encontrado'));
+            }
+
+
             return ListView.builder(
-              itemCount: characterList.length,
+              itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(characterList[index].name),
-                  leading: Image.network(characterList[index].image),
+                  title: Text(snapshot.data![index].name),
+                  leading: Image.network(snapshot.data![index].image,),
+
                 );
               },
             );
-          }
-        },
-      ),
+          },
+        )
+
     );
   }
 }
